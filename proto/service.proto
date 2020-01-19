@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package proto;
+
+message Post {
+    string id = 1;
+    string body = 2;
+}
+
+message ListPostsReq {}
+
+message ListPostsRes {
+    repeated Post posts = 1;
+}
+
+message CreatePostReq {
+    Post post = 1;
+}
+
+message CreatePostRes {
+    string message = 1;
+}
+
+message UpdatePostReq {
+    string id = 1;
+    Post post = 2;
+}
+
+message UpdatePostRes {
+    string message = 1;
+}
+
+message DeletePostReq {
+    string id = 1;
+}
+
+message DeletePostRes {
+    string message = 1;
+}
+
+message Request {
+    string id = 1;
+    string body = 2;
+}
+
+message Response {
+    string result = 1;
+    Error error = 2;
+}
+
+message Error {
+    string code = 1;
+    string message = 2;
+}
+
+service PostsService {
+    rpc CreatePost (CreatePostReq) returns (CreatePostRes);
+    rpc ReadPosts (ListPostsReq) returns (ListPostsRes);
+    rpc UpdatePost (UpdatePostReq) returns (UpdatePostRes);
+    rpc DeletePost (DeletePostReq) returns (DeletePostRes);
+}
+
